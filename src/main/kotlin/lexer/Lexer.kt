@@ -42,7 +42,7 @@ class Lexer(private val input: String) {
             current.isDigit() -> number()
             current.isLetter() || current == '_' -> identifier()
 //            symbols.contains(current) -> symbol()
-            else -> throw IllegalArgumentException("Illegal character: $current");
+            else -> throw IllegalArgumentException("Illegal character: $current")
         }
     }
 
