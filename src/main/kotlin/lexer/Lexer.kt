@@ -41,9 +41,14 @@ class Lexer(private val input: String) {
         return when {
             current.isDigit() -> number()
             current.isLetter() || current == '_' -> identifier()
+//            symbols.contains(current) -> symbol()
             else -> throw IllegalArgumentException("Illegal character: $current");
         }
     }
+
+//    private fun symbol(): Token {
+//
+//    }
 
     private fun number(): Token {
         val start = pos
