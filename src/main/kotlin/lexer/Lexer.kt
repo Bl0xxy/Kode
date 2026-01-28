@@ -15,7 +15,7 @@ enum class TokenType {
     EOL, EOF
 }
 
-data class Token(val type: TokenType, val value: String? = null);
+data class Token(val type: TokenType, val value: String? = null)
 
 class Lexer(private val input: String) {
     private val symbols = charArrayOf('+', '-', '*', '/')
