@@ -1,10 +1,17 @@
 package io.bl0xxy
 
-fun main() {
-    val name = "Kotlin"
-    println("Hello, $name!")
+import io.bl0xxy.lexer.Lexer
+import io.bl0xxy.lexer.Token
 
-    for (i in 1..5) {
-        println("i = $i")
+fun main() {
+    val lexer = Lexer("let x = 53 == 83;")
+    val tokens = mutableListOf<Token>()
+
+    while (true) {
+        val token = lexer.getNextToken()
+        tokens.add(token)
+        if (token is Token.EOF) break
     }
+
+    println("$tokens")
 }
