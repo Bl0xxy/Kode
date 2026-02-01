@@ -18,12 +18,15 @@ sealed class Token {
     data object GreaterEqual : Token()
 
     // Punctuation
+    data object LeftBracket  : Token()
+    data object RightBracket  : Token()
     data object LeftParen  : Token()
     data object RightParen : Token()
     data object LeftBrace  : Token()
     data object RightBrace : Token()
     data object Comma      : Token()
     data object Dot        : Token()
+    data object Colon  : Token()
     data object Semicolon  : Token()
 
     // Literals

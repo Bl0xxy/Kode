@@ -32,7 +32,10 @@ class Lexer(private val input: String) {
         '}' to Token.RightBrace,
         ',' to Token.Comma,
         '.' to Token.Dot,
-        ';' to Token.Semicolon
+        ';' to Token.Semicolon,
+        ':' to Token.Colon,
+        '[' to Token.LeftBracket,
+        ']' to Token.RightBracket
     )
 
     private val doubleCharTokens = mapOf(
@@ -63,7 +66,7 @@ class Lexer(private val input: String) {
             current.isDigit() -> number()
             current.isLetter() || current == '_' -> alphanumeric()
             current == '"' -> string()
-            else -> throw IllegalArgumentException("Illegal character: $current")
+            else -> throw RuntimeException("DEBUG: illegal char '$current' at $pos")
         }
     }
 
@@ -73,7 +76,7 @@ class Lexer(private val input: String) {
         while (currentChar != null && currentChar != '"')
             advance()
 
-        val end = pos - 1
+        val end = pos
         advance()
 
         return Token.StringLiteral(input.substring(start, end))
