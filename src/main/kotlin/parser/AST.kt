@@ -1,5 +1,9 @@
 package io.bl0xxy.parser
 
+enum class Assoc {
+
+}
+
 enum class BinaryOp(val symbol: String, val precedence: Int) {
     MUL("*", 3),
     DIV("/", 3),
@@ -21,6 +25,9 @@ enum class UnaryOp(val symbol: String) {
     NOT("!")
 }
 
+data class DeclBlock(val declarations: List<ASTNode.StmtNode.TopLevel>)
+data class StmtBlock(val statements: List<ASTNode.StmtNode.BlockLevel>)
+
 sealed class ASTNode {
 
     sealed class ExprNode : ASTNode() {
@@ -31,7 +38,16 @@ sealed class ASTNode {
     }
 
     sealed class StmtNode : ASTNode() {
-        data class ExprStmt(val value: ExprNode) : StmtNode()
+
+        sealed class TopLevel : StmtNode() {
+            data class ComponentDeclaration(val name: String, val body: DeclBlock) : TopLevel()
+            data class FunctionDeclaration(val name: String, val body: StmtBlock) : TopLevel()
+        }
+
+        sealed class BlockLevel : StmtNode() {
+            data class ExprStmt(val value: ExprNode) : StmtNode()
+        }
+
     }
 
 }

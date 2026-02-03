@@ -5,19 +5,19 @@ import io.bl0xxy.lexer.Token
 
 fun main() {
     val input = """
-        component MyPlugin thru Plugin {
-            name: "MyPlugin"
-            description: "Does things"
-            authors: ["Bl0xxy", "Other"]
-            commands: [HelloCommand]
-        }
+        component MyPlugin thru Plugin(
+            name="MyPlugin",
+            description="Does things",
+            authors=["Bl0xxy", "Other"],
+            commands=[HelloCommand]
+        )
         
-        component HelloCommand thru Command {
-            name: "hello"
-            display_name: "Hello"
-            description: "Greet a player with a friendly message!"
-        
-            func execute(Executor executor, List<String> args) -> optional CommandResult {
+        component HelloCommand thru Command(
+            name="hello",
+            display_name="Hello",
+            description="Greet a player with a friendly message!"
+        ) {
+            func execute(executor: CommandExecutor, args: List<String>) -> optional CommandResult {
                 executor.message("Hello, enjoy your stay!");
             }
         }       
