@@ -1,23 +1,28 @@
 package io.bl0xxy.parser
 
 enum class Assoc {
-
+    LEFT, RIGHT
 }
 
-enum class BinaryOp(val symbol: String, val precedence: Int) {
-    MUL("*", 3),
-    DIV("/", 3),
+enum class BinaryOp(val symbol: String, val precedence: Int, val assoc: Assoc) {
+    MUL("*", 20, Assoc.LEFT),
+    DIV("/", 20, Assoc.LEFT),
 
-    ADD("+", 2),
-    SUB("-", 2),
+    ADD("+", 15, Assoc.LEFT),
+    SUB("-", 15, Assoc.LEFT),
 
-    GT(">", 1),
-    LT("<", 1),
-    GTE(">=", 1),
-    LTE("<=", 1),
+    GT(">", 10, Assoc.LEFT),
+    LT("<", 10, Assoc.LEFT),
+    GTE(">=", 10, Assoc.LEFT),
+    LTE("<=", 10, Assoc.LEFT),
 
-    EQ("==", 0),
-    NEQ("!=", 0)
+    EQ("==", 5, Assoc.LEFT),
+    NEQ("!=", 5, Assoc.LEFT),
+
+    SET("=", 3, Assoc.RIGHT),
+
+    AND("&&", 2, Assoc.LEFT),
+    OR("||", 1, Assoc.LEFT)
 }
 
 enum class UnaryOp(val symbol: String) {
